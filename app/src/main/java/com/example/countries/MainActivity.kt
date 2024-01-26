@@ -1,9 +1,10 @@
 package com.example.countries
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,10 +17,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val tv: TextView = findViewById(R.id.tv_hello)
+        val rv: RecyclerView = findViewById(R.id.rv_countries)
+        rv.layoutManager = LinearLayoutManager(this)
         viewModel.run {
             countries.observe(this@MainActivity) {
-                tv.text = it.toString()
+                rv.adapter = CountriesAdapter(it)
             }
             getCountries()
         }
