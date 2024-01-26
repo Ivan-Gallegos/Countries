@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName
 
 data class Country(
     @SerializedName("capital")
-    val capital: String,
+    val capital: String = "",
     @SerializedName("code")
-    val code: String,
+    val code: String = "",
     @SerializedName("currency")
-    val currency: Currency,
+    val currency: Currency = Currency(),
     @SerializedName("demonym")
-    val demonym: String,
+    val demonym: String = "",
     @SerializedName("flag")
-    val flag: String,
+    val flag: String = "",
     @SerializedName("language")
-    val language: Language,
+    val language: Language = Language(),
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("region")
-    val region: String
+    val region: String = ""
 )

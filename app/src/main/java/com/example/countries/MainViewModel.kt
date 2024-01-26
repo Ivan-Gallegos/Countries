@@ -12,16 +12,24 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
     private val tag = this::class.simpleName
-    private val _countries : MutableLiveData<List<Country>> = MutableLiveData()
-    val countries :LiveData<List<Country>> = _countries
+    private val _countries : MutableLiveData<CountriesState> = MutableLiveData()
+    val countries :LiveData<CountriesState> = _countries
 
     fun getCountries(): Job = viewModelScope.launch {
         Repo.getCountries().run {
             if (isSuccessful) body()?.let {
                 Log.d(tag, "$it")
-                _countries.value = it
-            } else logErrorResponse(tag)
+                _countries.value = CountriesState.Success(it)
+            } else {
+                _countries.value = CountriesState.Error(errorBody()?.string().orEmpty())
+                logErrorResponse(tag)
+            }
         }
     }
 
+    sealed class CountriesState {
+        class Success(val countries : List<Country> = listOf()) : CountriesState()
+
+        class Error(val message : String = "") : CountriesState()
+    }
 }

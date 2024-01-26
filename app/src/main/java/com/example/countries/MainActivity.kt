@@ -1,10 +1,13 @@
 package com.example.countries
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.countries.MainViewModel.CountriesState.Error
+import com.example.countries.MainViewModel.CountriesState.Success
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,10 +21,14 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val rv: RecyclerView = findViewById(R.id.rv_countries)
+        val tv: TextView = findViewById(R.id.tv_error)
         rv.layoutManager = LinearLayoutManager(this)
         viewModel.run {
             countries.observe(this@MainActivity) {
-                rv.adapter = CountriesAdapter(it)
+                when (it) {
+                    is Success -> rv.adapter = CountriesAdapter(it.countries)
+                    is Error -> tv.text = it.message
+                }
             }
             getCountries()
         }
