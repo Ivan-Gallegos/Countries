@@ -1,3 +1,5 @@
+package com.example.countries
+
 import com.example.network.CountriesService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object Repo {
+object CountriesRepository {
 
     private val client: OkHttpClient = OkHttpClient().newBuilder()
         .addInterceptor(HttpLoggingInterceptor(DEFAULT).apply {

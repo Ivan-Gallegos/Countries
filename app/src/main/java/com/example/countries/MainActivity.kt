@@ -6,8 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.countries.MainViewModel.CountriesState.Error
-import com.example.countries.MainViewModel.CountriesState.Success
+import com.example.countries.GetCountriesUseCase.CountriesState.Error
+import com.example.countries.GetCountriesUseCase.CountriesState.Success
 
 class MainActivity : AppCompatActivity() {
 
